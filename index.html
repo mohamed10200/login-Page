@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>تواصل معنا</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+<div class="contact-container">
+    <h2>تواصل معنا</h2>
+<form id="contactForm">
+    <div class="form-group">
+    <label for="name">الاسم</label>
+    <i class="fas fa-user icon"></i>
+    <input type="text" id="name" placeholder="أدخل اسمك">
+    <div class="error" id="nameError">الرجاء إدخال الاسم</div>
+    </div>
+    <div class="form-group">
+    <label for="email">البريد الإلكتروني</label>
+    <i class="fas fa-envelope icon"></i>
+    <input type="email" id="email" placeholder="example@mail.com">
+    <div class="error" id="emailError">الرجاء إدخال بريد إلكتروني صحيح</div>
+    </div>
+    <div class="form-group">
+    <label for="message">الرسالة</label>
+    <i class="fas fa-comment icon"></i>
+    <textarea id="message" placeholder="اكتب رسالتك هنا"></textarea>
+    <div class="error" id="messageError">الرجاء كتابة رسالة</div>
+    </div>
+    <button type="submit">إرسال</button>
+    <div class="success" id="successMsg">تم إرسال الرسالة بنجاح!</div>
+</form>
+</div>
+
+<script>
+const form = document.getElementById('contactForm');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const messageInput = document.getElementById('message');
+
+const nameError = document.getElementById('nameError');
+const emailError = document.getElementById('emailError');
+const messageError = document.getElementById('messageError');
+const successMsg = document.getElementById('successMsg');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let valid = true;
+
+  if(nameInput.value.trim() === '') { nameError.style.display='block'; valid=false; } 
+  else { nameError.style.display='none'; }
+
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if(emailInput.value.trim()==='' || !emailInput.value.match(emailPattern)) { emailError.style.display='block'; valid=false; } 
+  else { emailError.style.display='none'; }
+
+  if(messageInput.value.trim()==='') { messageError.style.display='block'; valid=false; } 
+  else { messageError.style.display='none'; }
+
+  if(valid){
+    successMsg.style.display='block';
+    form.reset();
+    setTimeout(()=>{ successMsg.style.display='none'; }, 3000);
+  }
+});
+</script>
+
+</body>
+</html>
